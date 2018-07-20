@@ -5,6 +5,7 @@ import postcss from 'rollup-plugin-postcss'
 import resolve from 'rollup-plugin-node-resolve'
 import url from 'rollup-plugin-url'
 import builtins from 'rollup-plugin-node-builtins'
+import json from 'rollup-plugin-json'
 
 import pkg from './package.json'
 
@@ -32,8 +33,11 @@ export default {
       exclude: 'node_modules/**'
     }),
     resolve({
-      preferBuiltins: true
+      preferBuiltins: true,
+      browser: true,
+      jsnext: true
     }),
+    json(),
     builtins(),
     commonjs()
   ]

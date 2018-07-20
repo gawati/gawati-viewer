@@ -31,7 +31,9 @@ const __GAWATI_APIS = [
             'save-search-name' : '/gwu/save/search',
             'search-from-save-name' : '/gwu/search/search',
             'recent-search-from-save-name' : '/gwu/latest/search',
-            'keycloak' : '/gwp/auth.json'
+            'keycloak' : '/gwp/auth.json',
+            'docx-to-html' : '/gwv/docxTohtml',
+            'xml-to-html' : '/gwv/xmlToHtml',
         }
     }
 ];
@@ -91,6 +93,7 @@ export const apiLocalGetCall = (apiName) =>
  */
 export function apiGetCall(apiName, objParams) {
     let apiPath = apiUrl(apiName) ;
+    console.log("*********apiPath" + apiPath);
     if (apiPath !== false) {
         if (Object.keys(objParams).length === 0 && objParams.constructor === Object) {
             return apiPath;

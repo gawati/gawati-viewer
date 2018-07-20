@@ -15,12 +15,12 @@ npm install --save gawati-viewer
 ```jsx
 import React, { Component } from 'react'
 
-import MyComponent from 'gawati-viewer'
+import GawatiViewer from 'gawati-viewer'
 
 class Example extends Component {
   render () {
     return (
-      <MyComponent />
+      <GawatiViewer />
     )
   }
 }
