@@ -2,13 +2,13 @@ import React from 'react';
 import axios from 'axios';
 import {substringBeforeLastMatch } from './utils/stringhelper';
 import {documentServer} from './constants';
-import {anBody} from './utils/akomantoso';
+import {anBody, anDocType} from './utils/akomantoso';
 import "./DocumentDOCX.css";
 import {apiGetCall} from './api';
 
 const Aux = props => props.children;
 
-class DocumentConverted extends React.Component {  
+class NonPdfDocumentViewer extends React.Component {  
 
     constructor(props) {
         super(props);
@@ -18,7 +18,8 @@ class DocumentConverted extends React.Component {
     }
 
     getDocument() {
-        const body = anBody(this.props.doc, this.props.type);
+        const type = anDocType(this.props.doc);
+        const body = anBody(this.props.doc, type);
         let mainDocument ;
         if (Array.isArray(body.book)) {
             mainDocument = body.book.filter(book => book.refersTo === '#mainDocument');
@@ -28,32 +29,36 @@ class DocumentConverted extends React.Component {
         const cRef = mainDocument.componentRef;
         const docLink = documentServer() + substringBeforeLastMatch(cRef.src, "/") + "/" + cRef.alt;
         let apiDoc;
-        if (this.props.docType === 'DOCX') {
-            apiDoc = apiGetCall(
-                'docx-to-html', {
-                    iri : this.props.iri,
-                    docxLink : docLink 
-                } 
-            );
-        } else {
-            apiDoc = apiGetCall('xml-to-html', {
-                iri : this.props.iri,           
-                docType : this.props.type,
-                xmlLink : docLink
-            });
+        const typeToApi = {
+            'DOCX': 'docx-to-html',
+            'XML': 'xml-to-html'
         }
-        console.log("**********" + this.props.iri);
-        axios.get(apiDoc)
-            .then(response => {
-                const htmlDoc = response.data;
-                this.setState({
-                    loading: false,
-                    htmlDoc: htmlDoc,
-                });    
-            })
-            .catch(function(error) {
-                console.error("error in getDocument()", error);
+        if (typeToApi[this.props.format]) {
+            apiDoc = apiGetCall(
+                typeToApi[this.props.format], {
+                    docLink : docLink,
+                    info: ''
+                } 
+            )
+            axios.get(apiDoc)
+                .then(response => {
+                    const htmlDoc = response.data;
+                    this.setState({
+                        loading: false,
+                        htmlDoc: htmlDoc,
+                    });    
+                })
+                .catch(function(error) {
+                    console.error("error in getDocument()", error);
+                });
+        } else if (this.props.format === 'PNG') {
+            this.setState({
+                loading: false,
+                htmlDoc: "<div><img src='" + docLink + "' alt='' /></div>"
             });
+            return;
+        }
+        
     }
 
     componentDidMount() {
@@ -77,5 +82,5 @@ class DocumentConverted extends React.Component {
     }    
 }
   
-export default DocumentConverted;
+export default NonPdfDocumentViewer;
 

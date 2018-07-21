@@ -1,4 +1,3 @@
-//import {documentTypes} from '../constants';
 import docTypes from '../configs/docTypes.json';
 import languageCodes from '../configs/shortLanguageCodes.json';
 import dev from '../configs/dev.json';

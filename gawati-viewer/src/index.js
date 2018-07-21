@@ -1,29 +1,21 @@
 import React from 'react';
-import {substringBeforeLastMatch } from './utils/stringhelper';
-// import {documentServer} from 'constants';
 import {anBody} from './utils/akomantoso';
-import { Document } from 'react-pdf/dist/entry.webpack';
-import { Page } from 'react-pdf';
-import {capitalizeFirst} from './utils/stringhelper';
-import "./DocumentPDF.css";
-
-import DocumentPDF from './PdfViewer';
-import DocumentPNG from './PngViewer';
-import DocumentConverted from './ConvertedDocViewer';
+import PdfDocumentViewer from './PdfViewer';
+import NonPdfDocumentViewer from './NonPdfDocumentViewer';
 
 
 class GawatiViewer extends React.Component {
   
     render() {
       const doc = this.props.doc;
-      const type = this.props.type;
-      const iri = this.props.iri;
+      const searchTerm = this.props.searchTerm;
+      const format = doc.akomaNtoso.act.meta.proprietary.gawati.embeddedContents.embeddedContent.type.toUpperCase();
       
-      switch(doc.akomaNtoso.act.meta.proprietary.gawati.embeddedContents.embeddedContent.type.toUpperCase()){
-        case 'PDF': return <DocumentPDF doc={doc} type={type} />;
-        case 'PNG': return <DocumentPNG doc={doc} type={type} />;
-        case 'DOCX': return <DocumentConverted doc={doc} type={type} iri={iri} docType={'DOCX'}/>;
-        case 'XML': return <DocumentConverted doc={doc} type={type} iri={iri} docType={'XML'}/>;
+      switch (format){
+        case 'PDF': return <PdfDocumentViewer doc={doc} searchTerm={searchTerm}/>;
+        case 'PNG': return <NonPdfDocumentViewer doc={doc} format={'PNG'} searchTerm={searchTerm}/>;
+        case 'DOCX': return <NonPdfDocumentViewer doc={doc} format={'DOCX'} searchTerm={searchTerm}/>;        
+        case 'XML': return <NonPdfDocumentViewer doc={doc} format={'XML'} searchTerm={searchTerm}/>;
         default : return "Format not supported";
       } 
     }

@@ -1,10 +1,10 @@
 import React from 'react';
 import {substringBeforeLastMatch } from './utils/stringhelper';
-import {anBody} from './utils/akomantoso';
+import {anBody, anDocType} from './utils/akomantoso';
 import { Document } from 'react-pdf/dist/entry.webpack';
 import { Page } from 'react-pdf';
 import {capitalizeFirst} from './utils/stringhelper';
-import "./DocumentPDF.css";
+import "./PdfViewer.css";
 
 gawati = {
   GAWATI_PROXY: "http://data.local",
@@ -57,7 +57,7 @@ class PdfViewer extends React.Component {
         if (page === 1) {
           previousButton = <li className="previous disabled"><a><i className="fa fa-arrow-left"></i></a></li>;
         }
-        let nextButton = <li className="next active TEST" onClick={this.handleNext}><a><i className="fa fa-arrow-right"></i></a></li>;
+        let nextButton = <li className="next active" onClick={this.handleNext}><a><i className="fa fa-arrow-right"></i></a></li>;
         if (page === pages) {
           nextButton = <li className="next disabled"><a ><i className="fa fa-arrow-right"></i></a></li>;
         }
@@ -115,7 +115,7 @@ class PdfViewer extends React.Component {
     render() {
       const { pageNumber, numPages } = this.state;
       let doc = this.props.doc;
-      let type = this.props.type;
+      const type = anDocType(this.props.doc);
       let body = anBody(doc, type);
       let mainDocument ;
       if (Array.isArray(body.book)) {
