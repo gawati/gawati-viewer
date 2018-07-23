@@ -1,0 +1,12 @@
+.pdfview {
+    height:500px; 
+    width:100%; /** 2 columns **/
+    margin-bottom: 2em;
+    margin-top: 1em;
+}
+
+.highlight {
+    padding: 0.2em 0.6em;
+    background-color: transparent;
+    border-bottom: solid 5px yellow;
+}

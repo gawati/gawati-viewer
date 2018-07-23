@@ -1,0 +1,3 @@
+[submodule "gawati-viewer/gawati-portal-ui"]
+	path = gawati-viewer/gawati-portal-ui
+	url = https://gitlab.com/bungenicom/gawati/gawati-portal-ui
