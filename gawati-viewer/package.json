@@ -1,9 +1,9 @@
 {
   "name": "gawati-viewer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Viewer for Gawati documents",
   "author": "Arunadevi",
-  "license": "MIT",
+  "license": "AGPL-3.0",
   "repository": "https://gitlab.com/bungenicom/gawati/gawati-viewer.git",
   "main": "dist/index.js",
   "module": "dist/index.es.js",

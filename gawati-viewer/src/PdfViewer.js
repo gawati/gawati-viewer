@@ -1,18 +1,12 @@
 import React from 'react';
 import {substringBeforeLastMatch } from './utils/stringhelper';
 import {anBody, anDocType} from './utils/akomantoso';
-import { Document } from 'react-pdf/dist/entry.webpack';
+import { Document } from 'react-pdf';
 import { Page } from 'react-pdf';
 import {capitalizeFirst} from './utils/stringhelper';
-import "./PdfViewer.css";
+import "./css/PdfViewer.css";
+import {documentServer} from './constants';
 
-gawati = {
-  GAWATI_PROXY: "http://data.local",
-  GAWATI_DOCUMENT_SERVER: "http://media.local",
-  GAWATI_PROFILE_SERVER: "http://localhost"
-};
-
-const documentServer = () => "http://media.local" ;
 /**
  * Returns an array of a range of numbers
  * @param {integer} min 
