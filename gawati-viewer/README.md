@@ -28,4 +28,4 @@ class Example extends Component {
 
 ## License
 
-MIT © [Arunadevi](https://github.com/Arunadevi)
+AGPL-3.0 © [Arunadevi](https://github.com/Arunadevi)
