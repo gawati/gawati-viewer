@@ -75,7 +75,7 @@ class NonPdfDocumentViewer extends React.Component {
             );            
         } else {
             return(
-                <div className='ScrollStyle' contentEditable='true' dangerouslySetInnerHTML={{ __html: this.state.htmlDoc}}>
+                <div className='ScrollStyle' dangerouslySetInnerHTML={{ __html: this.state.htmlDoc}}>
                 </div>           
             );  
         }       
