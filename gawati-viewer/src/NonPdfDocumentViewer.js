@@ -3,7 +3,7 @@ import axios from 'axios';
 import {substringBeforeLastMatch } from './utils/stringhelper';
 import {documentServer} from './constants';
 import {anBody, anDocType} from './utils/akomantoso';
-import "./DocumentDOCX.css";
+import "./css/DocumentDOCX.css";
 import {apiGetCall} from './api';
 
 const Aux = props => props.children;

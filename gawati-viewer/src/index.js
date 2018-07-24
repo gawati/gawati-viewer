@@ -1,5 +1,4 @@
 import React from 'react';
-import {anBody} from './utils/akomantoso';
 import PdfDocumentViewer from './PdfViewer';
 import NonPdfDocumentViewer from './NonPdfDocumentViewer';
 
