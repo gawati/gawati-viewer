@@ -1,11 +1,14 @@
 import React from 'react';
 import {substringBeforeLastMatch } from './utils/stringhelper';
 import {anBody, anDocType} from './utils/akomantoso';
-import { Document } from 'react-pdf';
-import { Page } from 'react-pdf';
+import { Document, Page } from 'react-pdf/dist/entry.webpack';
+// import { Page } from 'react-pdf';
 import {capitalizeFirst} from './utils/stringhelper';
 import "./css/PdfViewer.css";
 import {documentServer} from './constants';
+
+
+PDFJS.workerSrc ='path to psd.worker.js';
 
 /**
  * Returns an array of a range of numbers
@@ -108,26 +111,14 @@ class PdfViewer extends React.Component {
   
     render() {
       const { pageNumber, numPages } = this.state;
-      let doc = this.props.doc;
-      const type = anDocType(this.props.doc);
-      let body = anBody(doc, type);
-      let mainDocument ;
-      if (Array.isArray(body.book)) {
-          mainDocument = body.book.filter(book => book.refersTo === '#mainDocument');
-      } else {
-          mainDocument = body.book;
-      }
-      
-      let cRef = mainDocument.componentRef;
-      let pdfLink = documentServer() + substringBeforeLastMatch(cRef.src, "/") + "/" + cRef.alt ;
       let pagination = this.renderPagination(this.state.pageNumber, this.state.numPages);
       let pageProps = this.getPageProps();
-
+      debugger;
       return (
         <div>
           { pagination }
           <Document
-            file={ pdfLink }
+            file={ this.props.attLink }
             onLoadSuccess={this.onDocumentLoad}
           >
             {
