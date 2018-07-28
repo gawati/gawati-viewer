@@ -113,7 +113,6 @@ class PdfViewer extends React.Component {
       const { pageNumber, numPages } = this.state;
       let pagination = this.renderPagination(this.state.pageNumber, this.state.numPages);
       let pageProps = this.getPageProps();
-      debugger;
       return (
         <div>
           { pagination }
