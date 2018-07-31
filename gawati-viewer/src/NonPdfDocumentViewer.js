@@ -18,16 +18,6 @@ class NonPdfDocumentViewer extends React.Component {
     }
 
     getDocument() {
-        const type = anDocType(this.props.doc);
-        const body = anBody(this.props.doc, type);
-        let mainDocument ;
-        if (Array.isArray(body.book)) {
-            mainDocument = body.book.filter(book => book.refersTo === '#mainDocument');
-        } else {
-            mainDocument = body.book;
-        }        
-        const cRef = mainDocument.componentRef;
-        const docLink = documentServer() + substringBeforeLastMatch(cRef.src, "/") + "/" + cRef.alt;
         let apiDoc;
         const typeToApi = {
             'DOCX': 'docx-to-html',
@@ -36,7 +26,7 @@ class NonPdfDocumentViewer extends React.Component {
         if (typeToApi[this.props.format]) {
             apiDoc = apiGetCall(
                 typeToApi[this.props.format], {
-                    docLink : docLink,
+                    docLink : this.props.attLink,
                     info: ''
                 } 
             )
@@ -54,7 +44,7 @@ class NonPdfDocumentViewer extends React.Component {
         } else if (this.props.format === 'PNG') {
             this.setState({
                 loading: false,
-                htmlDoc: "<div><img src='" + docLink + "' alt='' /></div>"
+                htmlDoc: "<div><img src='" + this.props.attLink + "' alt='' /></div>"
             });
             return;
         }
